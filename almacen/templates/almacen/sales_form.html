@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block section %}
+    <div class = "panel-heading" >
+        <h1 class = "panel-title">Ventas</h1>
+    </div>
+{% endblock section %}
+
+{% block maincontent %}
+<div class = "panel panel-primary" style="width: 300px">  
+    <div class = "panel-body">
+        <form enctype="multipart/form-data" method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <a class="btn btn-danger" href="{% url 'products-list' %}">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock maincontent%}
+
+{% block content %}
+<table class="table table-hover">
+    <thead>
+        <tr id="head" class="table-dark" style="text-align: center;">
+            <th scope="col">Codigo</th>
+            <th scope="col">Valor Unitario</th>
+            <th scope="col">Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="table-info" style="border-bottom: 2px solid; text-align: center ">
+            <th scope="row"> </th>
+            <td> </td>
+            <td> </td>
+        </tr>
+    </tbody>
+</table>
+<button class="btn btn-success" type="submit">Subir</button>
+<button class="btn btn-warning" type="reset">Limpiar</button>
+
+{% endblock%}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block section %}
+<h1 class="panel-title">Lista de Gastos</h1>
+{% endblock section %}
+
+{% block maincontent %}
+  	<div class="row well">
+		{% for p in object_list.all %}
+		<div style="width: 250px; padding-left: 50px;"> 			 
+			<div class="list-group" style="padding-bottom: 10px">
+				<div class="list-group-item list-group-item-action flex-column align-items-start active">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1"></h5>
+						 <small><a href="{% url "expenses-delete" p.id %}">X</a></small>
+					</div>
+				  	<p class="mb-1">
+						{{ p.date }}
+						
+				  	</p>
+				</div>
+				<div href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5>
+							{% if p.description %}
+								{{ p.description }}						 
+							{% endif %}
+						</h5>
+						<small class="text-muted">
+						
+						</small>
+				  	</div>
+				  	<p type="number" class="mb-1">
+						valor $
+						{% if p.description %}
+							{{ p.value }}						 
+						{% endif %}
+				  	</p>
+				</div>
+			</div>
+		</div>
+ 		{% endfor %}
+ 	</div>
+{% endblock maincontent %}
+
+{% block content %}
+<a href="{% url "expenses-create" %}"><button type="button" class="btn btn-success">Añadir un Gasto</button></a>
+{% endblock %} 
