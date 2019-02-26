@@ -23,12 +23,11 @@ class Sales(models.Model):
 
     """ Categorias para clasificar las ventas """
     date = models.DateField( "date", default=datetime.date.today)
-    cod = models.CharField(max_length=4, choices=CODIGOS_CHOICES)
-        
+    cod = models.CharField(max_length=4, choices=CODIGOS_CHOICES)        
     unitv = models.PositiveIntegerField( )
 
     def __str__(self):
-        return self.id 
+        return self.cod 
     def get_absolute_url(self):
         return reverse('sales-list')
 

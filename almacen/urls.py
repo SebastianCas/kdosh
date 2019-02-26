@@ -23,9 +23,11 @@ urlpatterns = [
     #Delete
     path('expenses/<int:pk>/delete/', (views.ExpensesDelete.as_view()), name='expenses-delete'),
     path('products/<int:pk>/delete/', (views.ProductsDelete.as_view()), name='products-delete'),
+    path('sales/<int:pk>/delete/', (views.SalesDelete.as_view()), name='sales-delete'),
 
     #update
     path('products/<int:pk>/update/', (views.ProductsUpdate.as_view()), name='products-update'),
+    path('sales/<int:pk>/update/', (views.SalesUpdate.as_view()), name='sales-update'),
     
     #path('about/', (views.ProductsListView.as_view()), name='about'),
 ]

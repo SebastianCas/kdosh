@@ -7,7 +7,7 @@ window.onload = function(){
       dia='0'+dia; //agrega cero si el menor de 10
     if(mes<10)
       mes='0'+mes //agrega cero si el menor de 10
-    document.getElementById('date').value=ano+"-"+mes+"-"+dia;
+    //document.getElementById('date').value=ano+"-"+mes+"-"+dia;
 }
 
 var show=0;
@@ -28,13 +28,13 @@ function elmenu(){
 }
 
 function totalprod() {
-    var cant = document.getElementById("cantidad").value;
-    var prec = document.getElementById("precio").value;
+    var cant = document.getElementById("id_amoutn").value;
+    var prec = document.getElementById("id_unitv").value;
 
     if(cant==""||prec==""){
-        document.getElementById("total").value = 0;
+        document.getElementById("id_total").value = 0;
     }
     else{
-        document.getElementById("total").value = parseInt(cant)*parseInt(prec);
+        document.getElementById("id_total").value = parseInt(cant)*parseInt(prec);
     }
  }

@@ -7,6 +7,7 @@
 {% endblock section %}
 
 {% block maincontent %}
+<h2>Productos</h2>
   	<div class="row well">
 		<table class="table table-hover">
 			<thead>
@@ -46,5 +47,43 @@
 			{% endif %}
 			</tbody>
 		</table>
- 	</div>
+	</div> 
 {% endblock maincontent %} 
+
+{% block content %}
+<h2>Ventas</h2>
+<div class="row well">
+	<table class="table table-hover">
+		<thead>
+			<tr id="head" class="table-dark" style="text-align: center;">
+				<th scope="col">Codigo</th>
+				<th scope="col">Precio</th>
+				<th scope="col">Fecha</th>
+				<th scope="col">Gestionar</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% if sales %}
+			 {% for sales in sales %}
+			 <tr class="table-info" style="border-bottom: 2px solid; text-align: center ">
+				<th scope="row">{{ sales.cod }}</th>
+				<td>{{ sales.unitv }}</td>
+				<td>{{ sales.date }}</td> 
+				<td><a href="{% url "sales-update" sales.id %}">
+						<button style="padding: 0;" type="button" class="btn btn-warning">Editar</button>
+					</a>
+					<a href="{% url "sales-delete" sales.id %}">
+						<button style="padding: 0;" type="button" class="btn btn-danger">Eliminar</button>
+					</a>
+				</td>
+			</tr>
+			{% endfor %}
+		{% else %}	
+		</tbody>
+	</table>
+	<h1 style="padding-left: 10%">No hay registros</h1>
+		{% endif %}
+		</tbody>
+	</table>
+ </div>
+{% endblock %}

@@ -7,7 +7,7 @@ from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from almacen.forms import ProductsForm, SalesForm, ExpensesForm
 from django.template import RequestContext
-
+from django.contrib import messages
 
 # Create your views here.
 def first_view(request):
@@ -27,19 +27,22 @@ class ExpensesDetailView(DetailView):
 
 def inventory(request):
     product=Products.objects.all()
-    context={'products':product}
+    sales=Sales.objects.all()
+    context={'products':product, 'sales':sales}
     return render(request, 'almacen/inventory_list.html', context)
 
 #create
 class ProductsCreate(CreateView):
     model = Products
     template_name = "almacen/products_form.html"
-    fields = '__all__'
+    form_class = ProductsForm
+    success_url = reverse_lazy('products-create')
 
 class SalesCreate(CreateView):
     model = Sales
     template_name = "almacen/sales_form.html"
     form_class = SalesForm 
+    success_url = reverse_lazy('sales-create')
 
 class ExpensesCreate(CreateView):
     model = Expenses
@@ -55,8 +58,19 @@ class ProductsDelete(DeleteView):
     model = Products
     success_url = reverse_lazy('inventory-list')
 
+class SalesDelete(DeleteView):
+    model = Sales
+    success_url = reverse_lazy('inventory-list')
+
 #update
 class ProductsUpdate(UpdateView):
     model = Products
     template_name= "almacen/products_form.html"
-    fields='__all__'
+    form_class = ProductsForm
+    success_url = reverse_lazy('inventory-list')
+
+class SalesUpdate(UpdateView):
+    model = Sales
+    template_name= "almacen/sales_form.html"
+    form_class = SalesForm
+    success_url = reverse_lazy('inventory-list')
