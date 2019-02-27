@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load filter %}
 
 {% block section %}
  	<h1>Inventario</h1>
@@ -29,7 +30,7 @@
 					<td>{{ products.description }}</td>
 					<td>{{ products.amoutn }}</td>
 					<td>{{ products.unitv }}</td>
-					<td>{{ products.total }}</td>
+					<td>{{ products.total|filtro }}</td>
 					<td>{{ products.date }}</td> 
 					<td><a href="{% url "products-update" products.id %}">
 							<button style="padding: 0;" type="button" class="btn btn-warning">Editar</button>

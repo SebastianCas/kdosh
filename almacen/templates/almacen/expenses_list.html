@@ -9,7 +9,7 @@
 {% block maincontent %}
   	<div class="row well">
 		{% for p in object_list.all %}
-		<div style="width: 250px; padding-left: 50px;"> 			 
+		<div style="width: 250px; padding-left: 50px; padding-bottom: 20px"> 			 
 			<div class="list-group" style="padding-bottom: 10px">
 				<div class="list-group-item list-group-item-action flex-column align-items-start active">
 					<div class="d-flex w-100 justify-content-between">
@@ -42,7 +42,24 @@
 			</div>
 		</div>
  		{% endfor %}
- 	</div>
+	 </div>
+	<div style="display: flex; justify-content: center; margin-right: 120px">
+		{% if page_obj.has_other_pages %}
+
+    		{% if page_obj.has_previous %}
+      			<a href="?page={{ page_obj.previous_page_number }}" class="btn btn-info"> << Previous </a>
+    		{% else %}
+				<button type="button" class="btn btn-info disabled"> << Previous </button>
+			{% endif %}
+
+    		{% if page_obj.has_next %}
+      			<a style="margin-left: 20px;" href="?page={{ page_obj.next_page_number }}" class="btn btn-info"> Next >> </a>
+    		{% else %}
+				<button style="margin-left: 20px;" type="button" class="btn btn-info disabled"> Next >> </button>
+			{% endif %}
+			
+		{% endif %}
+	</div>
 {% endblock maincontent %}
 
 {% block content %}

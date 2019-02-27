@@ -18,6 +18,8 @@ class Products(models.Model):
         return self.cod
     def get_absolute_url(self):
         return reverse('products-list')
+    class Meta:
+        ordering=["-id"]
 
 class Sales(models.Model):
 
@@ -30,17 +32,19 @@ class Sales(models.Model):
         return self.cod 
     def get_absolute_url(self):
         return reverse('sales-list')
+    class Meta:
+        ordering=["-id"]
 
 class Expenses(models.Model):
 
     """ Categorias para clasificar los gastos """
     description = models.CharField(max_length=50)
     value = models.PositiveIntegerField()
-    
     date = models.DateField( "date", default=datetime.date.today)
     
-
     def __str__(self):
-        return self.id
+        return self.description
     def get_absolute_url(self):
         return reverse('expenses-list')
+    class Meta:
+        ordering=["-id"]

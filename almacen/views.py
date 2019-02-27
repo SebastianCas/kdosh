@@ -22,6 +22,8 @@ class ProductsDetailView(DetailView):
 
 class ExpensesListView(ListView):
     model=Expenses
+    template_name = 'almacen/expenses_list.html'
+    paginate_by=4
 class ExpensesDetailView(DetailView):
     model = Expenses
 
