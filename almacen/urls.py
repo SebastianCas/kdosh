@@ -28,6 +28,9 @@ urlpatterns = [
     #update
     path('products/<int:pk>/update/', (views.ProductsUpdate.as_view()), name='products-update'),
     path('sales/<int:pk>/update/', (views.SalesUpdate.as_view()), name='sales-update'),
+
+    #buscar
+    path('buscar/',(views.Buscar.as_view()), name='buscar'),
     
     #path('about/', (views.ProductsListView.as_view()), name='about'),
 ]

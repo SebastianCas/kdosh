@@ -76,3 +76,37 @@ class SalesUpdate(UpdateView):
     template_name= "almacen/sales_form.html"
     form_class = SalesForm
     success_url = reverse_lazy('inventory-list')
+
+class Buscar(TemplateView):
+    template_name = "almacen/buscar.html"
+    def post(self, request, *args, **kwargs):
+        buscar=request.POST['cod']
+        buscar2=request.POST['date']
+          
+        producto2=Products.objects.filter(date__contains=buscar2)
+        ventas2=Sales.objects.filter(date__contains=buscar2)
+
+        if buscar2:
+            if buscar:
+                producto=Products.objects.filter(cod__contains=buscar,date__contains=buscar2)
+                ventas=Sales.objects.filter(cod__contains=buscar,date__contains=buscar2)
+                context={'producto':producto, 'ventas':ventas}
+                return render(request, "almacen/buscar.html", context)
+            else:
+                if buscar2:
+                    producto=Products.objects.filter(date__contains=buscar2)
+                    ventas=Sales.objects.filter(date__contains=buscar2)
+                    context={'producto':producto, 'ventas':ventas}
+                    return render(request, "almacen/buscar.html", context)
+                
+                elif buscar:
+                    producto=Products.objects.filter(cod__contains=buscar)
+                    ventas=Sales.objects.filter(cod__contains=buscar)
+                    context={'producto':producto, 'ventas':ventas}
+                    return render(request, "almacen/buscar.html", context)
+        else:
+            producto=Products.objects.filter(cod__contains=buscar)
+            ventas=Sales.objects.filter(cod__contains=buscar)
+            context={'producto':producto, 'ventas':ventas}
+            return render(request, "almacen/buscar.html", context)
+        

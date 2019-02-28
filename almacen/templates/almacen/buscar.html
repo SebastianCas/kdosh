@@ -1,23 +1,22 @@
 {% extends 'base.html' %}
 
 {% load static %}
-{% load filter %}
 
 {% block section %}
 	<h1>Inventario</h1>
 	<form action="/almacen/buscar/" method="POST">{% csrf_token %}
 		<div class="form-group row">
 			<label style="margin-right: 10px">Codigo:</label>
-			<select style="width: 80px;" class="form-control" name="cod">
-				<option></option>
-			  	<option>K10</option>
-			  	<option>K15</option>
-			  	<option>K20</option>
-			  	<option>K25</option>
-			  	<option>K30</option>
-			</select>
-
-			<label style="margin-right: 10px; margin-left: 20px;">Fecha:</label>
+            <select style="width: 80px;" class="form-control" name="cod">
+                <option></option>
+			    <option>K10</option>
+			    <option>K15</option>
+			    <option>K20</option>
+			    <option>K25</option>
+			    <option>K30</option>
+            </select>
+            
+            <label style="margin-right: 10px; margin-left: 20px;">Fecha:</label>
 			<input style="width: 180px;" type="date" class="form-control" name="date">
 			<button style="margin-left: 20px;" type="submit" class="btn btn-primary">Filtrar</button>
 		</div>
@@ -39,23 +38,23 @@
 				</tr>
 			</thead>
 			<tbody>
-			{% if products %}
- 				{% for products in products %}
+			{% if producto %}
+ 				{% for producto in producto %}
 		 		<tr class="table-info" style="border-bottom: 2px solid; text-align: center ">
-					<th scope="row">{{ products.cod }}</th>
-					<td>{{ products.amoutn }}</td>
-					<td>{{ products.unitv }}</td>
-					<td>{{ products.total }}</td>
-					<td>{{ products.date }}</td> 
-					<td><a href="{% url "products-update" products.id %}">
+					<th scope="row">{{ producto.cod }}</th>
+					<td>{{ producto.amoutn }}</td>
+					<td>{{ producto.unitv }}</td>
+					<td>{{ producto.total }}</td>
+					<td>{{ producto.date }}</td> 
+					<td><a href="{% url "products-update" producto.id %}">
 							<button style="padding: 0;" type="button" class="btn btn-warning">Editar</button>
 						</a>
-						<a href="{% url "products-delete" products.id %}">
+						<a href="{% url "products-delete" producto.id %}">
 							<button style="padding: 0;" type="button" class="btn btn-danger">Eliminar</button>
 						</a>
 					</td>
 				</tr>
-				{% endfor %}
+                {% endfor %}
 			{% else %}	
 			</tbody>
 		</table>
@@ -64,7 +63,7 @@
 			</tbody>
 		</table>
 	</div> 
-{% endblock maincontent %} 
+{% endblock maincontent %}
 
 {% block content %}
 <h2>Ventas</h2>
@@ -79,16 +78,16 @@
 			</tr>
 		</thead>
 		<tbody>
-		{% if sales %}
-			 {% for sales in sales %}
+		{% if ventas %}
+			 {% for ventas in ventas %}
 			 <tr class="table-info" style="border-bottom: 2px solid; text-align: center ">
-				<th scope="row">{{ sales.cod }}</th>
-				<td>{{ sales.unitv }}</td>
-				<td>{{ sales.date }}</td> 
-				<td><a href="{% url "sales-update" sales.id %}">
+				<th scope="row">{{ ventas.cod }}</th>
+				<td>{{ ventas.unitv }}</td>
+				<td>{{ ventas.date }}</td> 
+				<td><a href="{% url "sales-update" ventas.id %}">
 						<button style="padding: 0;" type="button" class="btn btn-warning">Editar</button>
 					</a>
-					<a href="{% url "sales-delete" sales.id %}">
+					<a href="{% url "sales-delete" ventas.id %}">
 						<button style="padding: 0;" type="button" class="btn btn-danger">Eliminar</button>
 					</a>
 				</td>
