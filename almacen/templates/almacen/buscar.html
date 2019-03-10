@@ -17,7 +17,7 @@
             </select>
             
             <label style="margin-right: 10px; margin-left: 20px;">Fecha:</label>
-			<input style="width: 180px;" type="date" class="form-control" name="date">
+			<input style="width: 25%;" type="date" class="form-control" name="date">
 			<button style="margin-left: 20px;" type="submit" class="btn btn-primary">Filtrar</button>
 		</div>
 	</form>
@@ -63,6 +63,25 @@
 			</tbody>
 		</table>
 	</div> 
+
+	<div class="pagination" style="width: 100%">
+		<span class="step-links" style="margin-left: auto; margin-right: auto;">
+			{% if producto.has_previous %}
+				<a href="?page=1" class="btn btn-success"> <<< Pagina 1</a>
+				<a href="?page={{ producto.previous_page_number }}" class="btn btn-info"> << Anterior </a>
+			{% endif %}
+	
+			<span class="current">
+				Pagina {{ producto.number }} de {{ producto.paginator.num_pages }}.
+			</span>
+	
+			{% if producto.has_next %}
+				<a href="?page={{ producto.next_page_number }}" class="btn btn-info">Siguiente >> </a>
+				<a href="?page={{ producto.paginator.num_pages }}" class="btn btn-success">Ultimo >>> </a>
+			{% endif %}
+		</span>
+	</div>
+
 {% endblock maincontent %}
 
 {% block content %}
@@ -101,4 +120,23 @@
 		</tbody>
 	</table>
  </div>
+
+ <div class="pagination" style="width: 100%">
+	<span class="step-links" style="margin-left: auto; margin-right: auto;">
+		{% if ventas.has_previous %}
+			<a href="?page=1" class="btn btn-success"> <<< Pagina 1</a>
+			<a href="?page={{ ventas.previous_page_number }}" class="btn btn-info"> << Anterior </a>
+		{% endif %}
+
+		<span class="current">
+			Pagina {{ ventas.number }} de {{ ventas.paginator.num_pages }}.
+		</span>
+
+		{% if ventas.has_next %}
+			<a href="?page={{ ventas.next_page_number }}" class="btn btn-info">Siguiente >> </a>
+			<a href="?page={{ ventas.paginator.num_pages }}" class="btn btn-success">Ultimo >>> </a>
+		{% endif %}
+	</span>
+</div>
+
 {% endblock %}

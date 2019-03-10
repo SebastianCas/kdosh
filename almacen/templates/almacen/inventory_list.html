@@ -5,9 +5,9 @@
 
 {% block section %}
 	<h1>Inventario</h1>
-	<form action="/almacen/buscar/" method="POST">{% csrf_token %}
+	<form action="/almacen/buscar/" method="POST" style="width: 100%">{% csrf_token %}
 		<div class="form-group row">
-			<label style="margin-right: 10px">Codigo:</label>
+			<label style="margin-right: 1%">Codigo:</label>
 			<select style="width: 80px;" class="form-control" name="cod">
 				<option></option>
 			  	<option>K10</option>
@@ -17,9 +17,9 @@
 			  	<option>K30</option>
 			</select>
 
-			<label style="margin-right: 10px; margin-left: 20px;">Fecha:</label>
+			<label style="margin-right: 1%; margin-left: 2%;">Fecha:</label>
 			<input style="width: 180px;" type="date" class="form-control" name="date">
-			<button style="margin-left: 20px;" type="submit" class="btn btn-primary">Filtrar</button>
+			<button style="margin-left: 2%;" type="submit" class="btn btn-primary">Filtrar</button>
 		</div>
 	</form>
 {% endblock section %}
@@ -63,7 +63,26 @@
 			{% endif %}
 			</tbody>
 		</table>
-	</div> 
+	</div>
+
+	<div class="pagination" style="width: 100%">
+		<span class="step-links" style="margin-left: auto; margin-right: auto;">
+			{% if products.has_previous %}
+				<a href="?page=1" class="btn btn-success"> <<< Pagina 1</a>
+				<a href="?page={{ products.previous_page_number }}" class="btn btn-info"> << Anterior </a>
+			{% endif %}
+	
+			<span class="current">
+				Pagina {{ products.number }} de {{ products.paginator.num_pages }}.
+			</span>
+	
+			{% if products.has_next %}
+				<a href="?page={{ products.next_page_number }}" class="btn btn-info">Siguiente >> </a>
+				<a href="?page={{ products.paginator.num_pages }}" class="btn btn-success">Ultimo >>> </a>
+			{% endif %}
+		</span>
+	</div>
+
 {% endblock maincontent %} 
 
 {% block content %}
@@ -102,4 +121,23 @@
 		</tbody>
 	</table>
  </div>
+
+<div class="pagination" style="width: 100%">
+	<span class="step-links" style="margin-left: auto; margin-right: auto;">
+		{% if sales.has_previous %}
+			<a href="?page=1" class="btn btn-success"> <<< Pagina 1</a>
+			<a href="?page={{ sales.previous_page_number }}" class="btn btn-info"> << Anterior </a>
+		{% endif %}
+
+		<span class="current">
+			Pagina {{ sales.number }} de {{ sales.paginator.num_pages }}.
+		</span>
+
+		{% if sales.has_next %}
+			<a href="?page={{ sales.next_page_number }}" class="btn btn-info">Siguiente >> </a>
+			<a href="?page={{ sales.paginator.num_pages }}" class="btn btn-success">Ultimo >>> </a>
+		{% endif %}
+	</span>
+</div>
+
 {% endblock %}

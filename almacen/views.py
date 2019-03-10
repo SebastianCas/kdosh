@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
 from almacen.forms import ProductsForm, SalesForm, ExpensesForm
 from django.template import RequestContext
+from django.core.paginator import Paginator
 from django.contrib import messages
 
 # Create your views here.
@@ -28,8 +29,16 @@ class ExpensesDetailView(DetailView):
     model = Expenses
 
 def inventory(request):
-    product=Products.objects.all()
-    sales=Sales.objects.all()
+    product_list=Products.objects.all().order_by("-id")
+    sales_list=Sales.objects.all().order_by("-id")
+
+    paginator = Paginator(product_list, 1)
+    paginator2 = Paginator(sales_list, 1)
+
+    page = request.GET.get('page')
+    product = paginator.get_page(page)
+    sales = paginator2.get_page(page)
+
     context={'products':product, 'sales':sales}
     return render(request, 'almacen/inventory_list.html', context)
 
@@ -82,31 +91,63 @@ class Buscar(TemplateView):
     def post(self, request, *args, **kwargs):
         buscar=request.POST['cod']
         buscar2=request.POST['date']
-          
-        producto2=Products.objects.filter(date__contains=buscar2)
-        ventas2=Sales.objects.filter(date__contains=buscar2)
 
         if buscar2:
             if buscar:
-                producto=Products.objects.filter(cod__contains=buscar,date__contains=buscar2)
-                ventas=Sales.objects.filter(cod__contains=buscar,date__contains=buscar2)
+                product_list=Products.objects.filter(cod__contains=buscar,date__contains=buscar2)
+                sales_list=Sales.objects.filter(cod__contains=buscar,date__contains=buscar2)
+
+                paginator = Paginator(product_list, 1)
+                paginator2 = Paginator(sales_list, 1)
+
+                page = request.GET.get('page')
+                ventas = paginator2.get_page(page)
+                producto = paginator2.get_page(page)
+
                 context={'producto':producto, 'ventas':ventas}
                 return render(request, "almacen/buscar.html", context)
             else:
                 if buscar2:
-                    producto=Products.objects.filter(date__contains=buscar2)
-                    ventas=Sales.objects.filter(date__contains=buscar2)
+                    product_list=Products.objects.filter(date__contains=buscar2)
+                    sales_list=Sales.objects.filter(date__contains=buscar2)
+                    
+                    paginator = Paginator(product_list, 1)
+                    paginator2 = Paginator(sales_list, 1)
+
+                    page = request.GET.get('page')
+                    ventas = paginator2.get_page(page)
+                    producto = paginator2.get_page(page)
+
                     context={'producto':producto, 'ventas':ventas}
                     return render(request, "almacen/buscar.html", context)
                 
                 elif buscar:
-                    producto=Products.objects.filter(cod__contains=buscar)
-                    ventas=Sales.objects.filter(cod__contains=buscar)
+                    product_list=Products.objects.filter(cod__contains=buscar)
+                    sales_list=Sales.objects.filter(cod__contains=buscar)
+
+                    paginator = Paginator(product_list, 1)
+                    paginator2 = Paginator(sales_list, 1)
+
+                    page = request.GET.get('page')
+                    ventas = paginator2.get_page(page)
+                    producto = paginator2.get_page(page)
+
                     context={'producto':producto, 'ventas':ventas}
                     return render(request, "almacen/buscar.html", context)
-        else:
-            producto=Products.objects.filter(cod__contains=buscar)
-            ventas=Sales.objects.filter(cod__contains=buscar)
+        elif buscar:
+            product_list=Products.objects.filter(cod__contains=buscar)
+            sales_list=Sales.objects.filter(cod__contains=buscar)
+
+            paginator = Paginator(product_list, 1)
+            paginator2 = Paginator(sales_list, 1)
+
+            page = request.GET.get('page')
+            ventas = paginator2.get_page(page)
+            producto = paginator2.get_page(page)
+
             context={'producto':producto, 'ventas':ventas}
             return render(request, "almacen/buscar.html", context)
+        
+        else:
+            return render(request, "almacen/buscar.html")
         

@@ -10,25 +10,28 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
     <script src="{% static 'json/script.js' %}"></script>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimun-scale=1.0">
 </head>
-<body>
+<div class="contenedor">
+<body onLoad="setInterval('contador()',1000);">
+        <label for="contador">Contador:</label><input type="text" id="contador">
     <header class = "navbar navbar-expand-lg navbar-dark bg-dark">
         <div style="width: 100%;">
         <div id="bann"></div>
         <div id="com">
-        <div style="float:left">
-            <button onclick="elmenu()" type="button" class="btn btn-outline-primary"> <span class = "navbar-toggler-icon"> </span> </button>
+        <div style="float:left; width: 48%">
+            <button id="botonmenu" onclick="elmenu()" type="button" class="btn btn-outline-primary"> <span id="hambu" class = "navbar-toggler-icon"> </span> </button>
             <a class="navbar-brand" href="{% url "base" %}"> KADOSH </a>
         </div>
-        <div style="float:right">
-            <strong id="name" class="col-form-label col-form-label-lg"> Administrador </strong>
-            <button type="button" class="btn btn-danger">Cerrar Sesion</button>
+        <div style="float:right; width: 48%; text-align: right">
+            <strong style="font-size: 100%;" id="name" class="col-form-label col-form-label-lg"> Administrador </strong>
+            <button id="botoncerrar" type="button" class="btn btn-danger">Cerrar Sesion</button>
         </div>
         </div>
         </div>
     </header>
     <!-- NavBar -->
-        <div id="menu" class = "navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav id="menu" class = "navbar navbar-expand-lg navbar-dark bg-dark">
             <ul>      
                 <a href="{% url "products-create" %}"><button type="button" class="btn btn-primary">Productos</button></a>
                 <a href="{% url "sales-create" %}"><button type="button" class="btn btn-primary">Ventas</button></a>
@@ -37,13 +40,16 @@
                 <a href="#"><button type="button" class="btn btn-primary">Usuarios</button></a>
                 <a href=""><button type="button" class="btn btn-primary">About</button></a>
             </ul>
-        </div>
+        </nav>
         <div id="estad" class="jumbotron">
-            <h1> GRAFICAS </h1>
+            <h1 style="font-size: 5vw"> GRAFICAS </h1>
+            <footer id="foter" style="width:100%; height: 7%; position: absolute; bottom: 14%;">
+                <button onclick="elestad()" class="btn btn-outline-primary" style="padding: 0; font-size: 3vw; margin-left: 15%;">GRAFICAS ▼</button>
+            </footer>
         </div>
         <main id="contenido" class="jumbotron">
-        <div style="margin-left: 40px;">
-            <div class="container">
+        <div style="margin-left: 5%;">
+            <div style="width: 100%" class="container">
                 {% block section %}
                 {% endblock section %}
             </div><hr>
@@ -59,4 +65,5 @@
         </main>
         
 </body>
+</div>
 </html>

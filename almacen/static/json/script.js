@@ -1,28 +1,48 @@
 window.onload = function(){
-    var fecha = new Date(); //Fecha actual
-    var mes = fecha.getMonth()+1; //obteniendo mes
-    var dia = fecha.getDate(); //obteniendo dia
-    var ano = fecha.getFullYear(); //obteniendo año
-    if(dia<10)
-      dia='0'+dia; //agrega cero si el menor de 10
-    if(mes<10)
-      mes='0'+mes //agrega cero si el menor de 10
-    //document.getElementById('date').value=ano+"-"+mes+"-"+dia;
+    var ancho=document.getElementById("contenido").offsetWidth;
+    var element=document.getElementById("contenido")
+    var element2 = document.getElementById("menu");
+    var element3 = document.getElementById("estad");
+
+    if(ancho<548){
+        element.classList.add("menu2");
+        element2.classList.add("contenido2");
+    }
+
+    //alert (element)
+}
+
+var cont = 0;
+function contador(){
+	var contador = document.getElementById("contador");
+	contador.value = cont;
+    cont++;
 }
 
 var show=0;
 function elmenu(){
     var element = document.getElementById("menu");
-    var element2=document.getElementById("contenido");
 
     if(show==0){
-        element.classList.add("menu2");
-        element2.classList.add("contenido2");
-        
+        element.style.left="0";
+        //document.getElementById("contenido").style.width="69%";
         show=1;
     }else{
-        element.classList.remove("menu2");
-        element2.classList.remove("contenido2");
+        element.removeAttribute("style");
+        //document.getElementById("contenido").removeAttribute("style");
+        show=0;
+    }
+}
+
+function elestad(){
+    var element = document.getElementById("estad");
+
+    if(show==0){
+        //element.style.left="0";
+        element.style.transform="translateY(0)";
+        show=1;
+    }else{
+        element.removeAttribute("style");
         show=0;
     }
 }
